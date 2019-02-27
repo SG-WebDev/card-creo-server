@@ -1,5 +1,7 @@
 // Import express
 let express = require('express');
+// Import cors
+let cors = require('cors');
 // Import Body parser
 let bodyParser = require('body-parser');
 // Import Mongoose
@@ -21,6 +23,7 @@ let dbName = '';
 mongoose.connect(`mongodb://${user}:${pass}@${host}/${dbName}`);
 var db = mongoose.connection;
 
+app.use(cors());
 // Use Api routes in the App
 app.use('/api', apiRoutes);
 // Send message for default URL
