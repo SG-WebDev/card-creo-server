@@ -1,7 +1,7 @@
-var mongoose = require('mongoose');
+const mongoose = require('mongoose');
 
 // Setup schema
-var cardSchema = mongoose.Schema({
+const cardSchema = mongoose.Schema({
     bgColor: {
         type: String,
         required: true
@@ -25,7 +25,7 @@ var cardSchema = mongoose.Schema({
     }
 });
 // Export Contact model
-var Card = module.exports = mongoose.model('card', cardSchema);
+const Card = module.exports = mongoose.model('card', cardSchema);
 
 module.exports.get = function (callback, limit) {
     Card.find(callback).limit(limit);

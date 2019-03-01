@@ -9,7 +9,9 @@ let mongoose = require('mongoose');
 // Initialize the app
 let app = express();
 // Import routes
-let apiRoutes = require("./api");
+let apiRoutes = require("./routes/api");
+// Import passport config
+require('./config/passport');
 // Configure bodyparser to handle post requests
 app.use(bodyParser.urlencoded({
     extended: true

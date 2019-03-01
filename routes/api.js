@@ -8,7 +8,7 @@ router.get('/', function (req, res) {
     });
 });
 // Import contact controller
-var cardController = require('./cardController');
+var cardController = require('../controllers/cardController');
 // Contact routes
 router.route('/cards')
     .get(cardController.index)
@@ -18,6 +18,8 @@ router.route('/cards/:card_id')
     .patch(cardController.update)
     .put(cardController.update)
     .delete(cardController.delete);
+
+router.use('/users', require('./user'));
 
 // Export API routes
 module.exports = router;

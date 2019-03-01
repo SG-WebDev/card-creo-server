@@ -1,5 +1,5 @@
 // Import contact model
-Card = require('./cardModel');
+Card = require('../models/cardModel');
 // Handle index actions
 exports.index = function (req, res) {
     Card.get(function (err, cards) {
