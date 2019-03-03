@@ -1,26 +1,33 @@
-const jwt = require('express-jwt');
+var express = require('express');
+var router = express.Router();
+var passport = require('passport');
 
-const getTokenFromHeaders = (req) => {
-    const { headers: { authorization } } = req;
+router.post('/signup', passport.authenticate('local-signup', {
+    successRedirect : '/auth/profile',
+    failureRedirect : 'auth/signup'
+}));
 
-    if(authorization && authorization.split(' ')[0] === 'Token') {
-        return authorization.split(' ')[1];
-    }
-    return null;
-};
+router.post('/login', passport.authenticate('local-login', {
+    successRedirect : '/auth/profile',
+    failureRedirect : 'auth/login'
+}));
+router.get('/check', isLoggedIn, (req, res) => {
+    res.status(200).json(req.user);
+});
+router.get('/logout', isLoggedIn, (req, res) => {
+    req.logout();
+    res.status(200).json({
+        'message': 'successfully logout'
+    });
+});
 
-const auth = {
-    required: jwt({
-        secret: 'secret',
-        userProperty: 'payload',
-        getToken: getTokenFromHeaders,
-    }),
-    optional: jwt({
-        secret: 'secret',
-        userProperty: 'payload',
-        getToken: getTokenFromHeaders,
-        credentialsRequired: false,
-    }),
-};
+module.exports = router;
 
-module.exports = auth;
+//route middleware to ensure user is logged in
+function isLoggedIn(req, res, next) {
+    if (req.isAuthenticated())
+        return next();
+    res.status(400).json({
+        'message': 'access denied'
+    });
+}

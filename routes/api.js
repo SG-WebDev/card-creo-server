@@ -1,5 +1,6 @@
 // Initialize express router
-let router = require('express').Router();
+var express = require('express');
+var router = express.Router();
 // Set default API response
 router.get('/', function (req, res) {
     res.json({
@@ -18,8 +19,6 @@ router.route('/cards/:card_id')
     .patch(cardController.update)
     .put(cardController.update)
     .delete(cardController.delete);
-
-router.use('/users', require('./user'));
 
 // Export API routes
 module.exports = router;
