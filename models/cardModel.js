@@ -19,6 +19,10 @@ const cardSchema = mongoose.Schema({
     email: String,
     phone: String,
     website: String,
+    userID: {
+        type: String,
+        required: true
+    },
     create_date: {
         type: Date,
         default: Date.now
