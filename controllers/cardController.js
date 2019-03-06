@@ -2,7 +2,9 @@
 Card = require('../models/cardModel');
 // Handle index actions
 exports.index = function (req, res) {
-    Card.get(function (err, cards) {
+    Card.find({
+        userID: req.body.userID
+    },function (err, cards) {
         if (err) {
             res.json({
                 status: "error",
@@ -27,10 +29,11 @@ exports.new = function (req, res) {
     card.email = req.body.email;
     card.phone = req.body.phone;
     card.website = req.body.website;
+    card.userID = req.body.userID;
 // Save the card and check for errors
     card.save(function (err) {
-        // if (err)
-        //     res.json(err);
+        if (err)
+            res.json(err);
         res.json({
             message: 'New card created!',
             data: card
