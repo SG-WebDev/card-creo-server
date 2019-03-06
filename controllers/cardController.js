@@ -32,8 +32,8 @@ exports.new = function (req, res) {
     card.userID = req.body.userID;
 // Save the card and check for errors
     card.save(function (err) {
-        if (err)
-            res.json(err);
+        // if (err)
+        //     res.json(err);
         res.json({
             message: 'New card created!',
             data: card
