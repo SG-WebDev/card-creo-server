@@ -11,12 +11,12 @@ router.get('/', function (req, res) {
 // Import contact controller
 var cardController = require('../controllers/cardController');
 // Contact routes
-router.route('/cards')
-    .get(cardController.index)
+router.route('/cards/:userID')
+    .get(cardController.index);
+router.route('/card')
     .post(cardController.new);
-router.route('/cards/:card_id')
+router.route('/card/:card_id')
     .get(cardController.view)
-    .patch(cardController.update)
     .put(cardController.update)
     .delete(cardController.delete);
 

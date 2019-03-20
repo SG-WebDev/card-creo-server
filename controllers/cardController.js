@@ -3,7 +3,7 @@ Card = require('../models/cardModel');
 // Handle index actions
 exports.index = function (req, res) {
     Card.find({
-        userID: req.body.userID
+        userID: req.params.userID
     },function (err, cards) {
         if (err) {
             res.json({
